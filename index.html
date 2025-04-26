@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Finals Lab Task 3.2 - MySQL Courses Table</title>
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(120deg, #000 30%, #020f1f 70%);
+      color: white;
+      line-height: 1.6;
+    }
+    header {
+      background: #0a0a0a;
+      padding: 20px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 0 10px white;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 999;
+    }
+    @keyframes color-change {
+      0% { color: white; }
+      50% { color: #00f0ff; }
+      100% { color: white; }
+    }
+    h1 {
+      font-size: 2rem;
+      animation: color-change 10s ease-in-out infinite;
+    }
+    nav a {
+      color: white;
+      text-decoration: none;
+      margin-left: 20px;
+      font-weight: bold;
+      transition: color 0.3s ease;
+    }
+    nav a:hover {
+      color: #00f0ff;
+    }
+    section {
+      padding: 100px 20px 40px; 
+      max-width: 1200px;
+      margin: auto;
+    }
+    h2.section-title {
+      font-size: 2rem;
+      margin-bottom: 20px;
+      border-bottom: 2px solid white;
+      display: inline-block;
+      padding-bottom: 5px;
+    }
+    .step-process {
+      margin-top: 20px;
+    }
+    .step-process h3 {
+      font-size: 1.5rem;
+      margin: 20px 0 10px;
+    }
+    .step-process ul {
+      list-style: none;
+      padding-left: 0;
+    }
+    .step-process ul li {
+      margin-bottom: 10px;
+    }
+    .project-image {
+      width: 100%;
+      max-width: 800px;
+      margin: 20px auto;
+      border-radius: 10px;
+      border: 2px solid white;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      display: block;
+      cursor: pointer;
+    }
+    .project-image:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 15px 5px rgba(0, 240, 255, 0.8);
+    }
+    .download-btn {
+      display: inline-block;
+      margin-top: 20px;
+      padding: 12px 24px;
+      background: linear-gradient(135deg, #00f0ff, #007fff);
+      color: #000;
+      font-weight: bold;
+      text-decoration: none;
+      border-radius: 8px;
+      transition: all 0.3s ease;
+      box-shadow: 0 0 10px rgba(0, 240, 255, 0.5);
+    }
+    .download-btn i {
+      margin-right: 10px;
+    }
+    .download-btn:hover {
+      background: white;
+      color: #000;
+      transform: scale(1.05);
+      box-shadow: 0 0 20px rgba(0, 240, 255, 0.8);
+    }
+    footer {
+      text-align: center;
+      padding: 20px;
+      border-top: 1px solid white;
+      background: #0a0a0a;
+      margin-top: 40px;
+      color: #aaa;
+    }
+    .preview-modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.7);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 999;
+      backdrop-filter: blur(10px);
+    }
+    .preview-modal img {
+      max-width: 80%;
+      max-height: 80%;
+      transition: transform 0.3s ease;
+    }
+    .preview-modal.show {
+      display: flex;
+    }
+    .preview-modal .close-btn {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      width: 40px;
+      height: 40px;
+      font-size: 30px;
+      color: white;
+      background: rgba(0, 0, 0, 0.7);
+      border: none;
+      border-radius: 50%;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+    .preview-modal .close-btn:hover {
+      background: rgba(255, 0, 0, 0.7);
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Finals Lab Task 3.2 - MySQL Courses Table</h1>
+    <nav>
+      <a href="https://austincgarcia.github.io/AustinEDM/">Back to Portfolio</a>
+    </nav>
+  </header>
+  <section>
+    <h2 class="section-title">Project Overview</h2>
+    <p>This project demonstrates my ability to work with MySQL databases by managing a <code>courses</code> table containing details such as course names, categories, enrollment limits, and the number of students enrolled. It includes executing essential SQL queries like data retrieval, aggregation, filtering, grouping, and sorting.</p>
+    <a href="https://github.com/user-attachments/files/19922643/Finals.Task.3.Using.MYSQL.Clause.Garcia.docx" class="download-btn" target="_blank">
+      <i class="fas fa-file-download"></i> Download Document
+    </a>
+    <div class="step-process">
+      <h3>Step by Step Process</h3>
+      <ul>
+        <li><strong>A table named <code>courses</code> with the following fields:</strong></li>
+        <ul>
+          <li><strong>Id:</strong> Unique integer, auto-increment, primary key.</li>
+          <li><strong>course_name:</strong> String (VARCHAR), not null.</li>
+          <li><strong>category:</strong> String (VARCHAR), not null.</li>
+          <li><strong>enrollment_limit:</strong> Integer, not null.</li>
+          <li><strong>students_enrolled:</strong> Integer, not null.</li>
+        </ul>
+        <li><strong>20 courses are already present.</strong></li>
+      </ul>
+      <h4>Query Statement Screenshot</h4>
+      <img src="https://github.com/user-attachments/assets/54ee6185-44da-4673-89eb-17a9549c291d" alt="Query Statement Screenshot" class="project-image" onclick="openPreview(this)">
+    </div>
+    <h2 class="section-title">SQL Tasks</h2>
+    <ol>
+      <li>
+        <strong>Task 1:</strong> Retrieve all courses where <code>students_enrolled</code> is less than the <code>enrollment_limit</code>.
+        <div>
+          <h4>Query Statement and Table Screenshots</h4>
+          <img src="https://github.com/user-attachments/assets/0ac1e0ba-bcb1-4e00-a0ac-2428b7e6240f" alt="Task 1 Query" class="project-image" onclick="openPreview(this)">
+          <img src="https://github.com/user-attachments/assets/b944b778-7c2c-476b-bc20-6a44405e8c35" alt="Task 1 Table" class="project-image" onclick="openPreview(this)">
+        </div>
+      </li>
+      <li>
+        <strong>Task 2:</strong> Group courses by <code>category</code> and calculate the total number of students enrolled for each category.
+        <div>
+          <h4>Query Statement and Table Screenshots</h4>
+          <img src="https://github.com/user-attachments/assets/794edbca-785e-4fd5-9341-9436a7befb76" alt="Task 2 Query" class="project-image" onclick="openPreview(this)">
+          <img src="https://github.com/user-attachments/assets/a93842fe-7941-4c80-bbc1-c68125ff6767" alt="Task 2 Table" class="project-image" onclick="openPreview(this)">
+        </div>
+      </li>
+      <li>
+        <strong>Task 3:</strong> Retrieve the courses that are fully enrolled (i.e., <code>students_enrolled</code> equals <code>enrollment_limit</code>).
+        <div>
+          <h4>Query Statement and Table Screenshots</h4>
+          <img src="https://github.com/user-attachments/assets/93a867f0-199f-4c0a-9fc2-512d8c66d4c5" alt="Task 3 Query" class="project-image" onclick="openPreview(this)">
+          <img src="https://github.com/user-attachments/assets/ce9e503b-86d1-42ed-b80b-6f35a12ff8cf" alt="Task 3 Table" class="project-image" onclick="openPreview(this)">
+        </div>
+      </li>
+      <li>
+        <strong>Task 4:</strong> Calculate the total number of students enrolled across all courses.
+        <div>
+          <h4>Query Statement and Table Screenshots</h4>
+          <img src="https://github.com/user-attachments/assets/54e99c9e-15e4-4c4a-a04f-243d41c3a132" alt="Task 4 Query" class="project-image" onclick="openPreview(this)">
+          <img src="https://github.com/user-attachments/assets/ffc72ab1-1307-4533-9da1-286e9e69b133" alt="Task 4 Table" class="project-image" onclick="openPreview(this)">
+        </div>
+      </li>
+      <li>
+        <strong>Task 5:</strong> Sort courses by <code>students_enrolled</code> in ascending order.
+        <div>
+          <h4>Query Statement and Table Screenshots</h4>
+          <img src="https://github.com/user-attachments/assets/44a1b593-8639-48aa-84b5-e0c155a5671e" alt="Task 5 Query" class="project-image" onclick="openPreview(this)">
+          <img src="https://github.com/user-attachments/assets/4c552245-c89a-4dac-94f8-f9da18bc1959" alt="Task 5 Table" class="project-image" onclick="openPreview(this)">
+        </div>
+      </li>
+    </ol>
+  </section>
+  <footer>
+    <p>© 2025 Austin's EDM Portfolio. All rights reserved.</p>
+  </footer>
+  <div id="preview-modal" class="preview-modal">
+    <button class="close-btn" onclick="closePreview()">×</button>
+    <img id="preview-image" src="" alt="Preview Image">
+  </div>
+  <script>
+    function openPreview(image) {
+      var modal = document.getElementById("preview-modal");
+      var previewImage = document.getElementById("preview-image");
+      previewImage.src = image.src;
+      modal.classList.add("show");
+      document.body.style.overflow = "hidden";
+    }
+    function closePreview() {
+      var modal = document.getElementById("preview-modal");
+      modal.classList.remove("show");
+      document.body.style.overflow = "auto";
+    }
+  </script>
+</body>
+</html> 
