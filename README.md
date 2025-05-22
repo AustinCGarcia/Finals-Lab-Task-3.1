@@ -1,4 +1,4 @@
-# [Finals-Lab-Task-3.1](https://github.com/user-attachments/files/19922643/Finals.Task.3.Using.MYSQL.Clause.Garcia.docx)
+# [Finals-Lab-Task-4](https://github.com/user-attachments/files/19922643/Finals.Task.3.Using.MYSQL.Clause.Garcia.docx)
 – This project demonstrates my ability to work with MySQL databases by managing a courses table containing details such as course names, categories, enrollment limits, and the number of students enrolled. It includes executing essential SQL queries like data retrieval, aggregation, filtering, grouping, and sorting.
 ## Step by Step Process
 
